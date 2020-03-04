@@ -8,6 +8,9 @@ namespace Ladeskab
 {
     public class Class1
     {
-        
+        public int testMetode(int value)
+        {
+            return value;
+        }
     }
 }
