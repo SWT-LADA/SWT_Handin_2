@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.DisplayFolder
 {
-    class Display
+    public class Display : IDisplay
     {
+        public void WriteMessage(string msg)
+        {
+
+        }
     }
 }

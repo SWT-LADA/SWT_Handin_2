@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.DoorEvent
 {
-    class DoorChangedEventArgs
+    public class DoorChangedEventArgs
     {
     }
 }

@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.Controller
 {
-    class ChargeControl
+    public class ChargeControl : IChargeControl
     {
+        private void HandleUSBChangedEvent(object s, USBChangedEventArgs e)
+        {
+
+        }
+
+        public bool IsConnected()
+        {
+
+        }
+
+        public void StartCharge()
+        {
+
+        }
+
+        public void StopCharge()
+        {
+
+        }
     }
 }
