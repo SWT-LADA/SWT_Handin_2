@@ -8,5 +8,10 @@ namespace Ladeskab.DoorEvent
 {
     public interface IDoor
     {
+        event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
+
+        void LockDoor();
+
+        void UnlockDoor();
     }
 }
