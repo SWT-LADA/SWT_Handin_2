@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.FileWriterFolder
 {
-    class FileWriter
+    public class FileWriter : IFileWriter
     {
+        public void LogDoorLocked(int ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LogDoorUnlocked(int ID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

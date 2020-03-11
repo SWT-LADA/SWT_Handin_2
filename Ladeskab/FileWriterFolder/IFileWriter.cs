@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.FileWriterFolder
 {
-    class IFileWriter
+    public interface IFileWriter
     {
+        void LogDoorLocked(int ID);
+        void LogDoorUnlocked(int ID);
     }
 }
