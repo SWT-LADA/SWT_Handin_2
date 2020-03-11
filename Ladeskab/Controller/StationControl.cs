@@ -6,7 +6,21 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.Controller
 {
-    class StationControl
+    public class StationControl
     {
+        private void HandleDoorChangedEvent(object s, DoorChangedEventArgs e)
+        {
+
+        }
+
+        private void HandleRFIDChangedEvent(object s, RFIDChangedEventArgs e)
+        {
+
+        }
+
+        private bool CheckID(int OldID, int ID)
+        {
+
+        }
     }
 }
