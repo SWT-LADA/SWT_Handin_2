@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ladeskab.DoorEvent;
+using Ladeskab.RFIDEvent;
 
 namespace Ladeskab.Controller
 {
@@ -20,7 +22,7 @@ namespace Ladeskab.Controller
 
         private bool CheckID(int OldID, int ID)
         {
-
+            return true;
         }
     }
 }

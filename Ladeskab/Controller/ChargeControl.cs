@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ladeskab.USBChargerFolder;
 
 namespace Ladeskab.Controller
 {
@@ -15,7 +16,7 @@ namespace Ladeskab.Controller
 
         public bool IsConnected()
         {
-
+            return true;
         }
 
         public void StartCharge()
