@@ -12,7 +12,7 @@ namespace Ladeskab.DoorEvent
 
         public bool SetDoorState()
         {
-
+            return true;
         }
 
         public void LockDoor()
