@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ladeskab\LadeskabClassLibrary.csproj">
+      <Project>{bac6b22b-7c4f-4ba7-90bf-4d13d5be697c}</Project>
+      <Name>LadeskabClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
