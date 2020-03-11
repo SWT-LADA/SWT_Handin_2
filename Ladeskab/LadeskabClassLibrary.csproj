@@ -52,12 +52,12 @@
     <Compile Include="FileWriterFolder\FileWriter.cs" />
     <Compile Include="FileWriterFolder\IFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RFIDEvent\IFRIDReader.cs" />
+    <Compile Include="RFIDEvent\RFIDReader.cs" />
     <Compile Include="RFIDEvent\IRFIDReader.cs" />
     <Compile Include="RFIDEvent\RFIDChangedEventArgs.cs" />
     <Compile Include="USBChargerFolder\IUSBCharger.cs" />
     <Compile Include="USBChargerFolder\USBCharger.cs" />
-    <Compile Include="USBChargerFolder\USBChargerEventArgs.cs" />
+    <Compile Include="USBChargerFolder\USBChangedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.USBChargerFolder
 {
-    class IUSBCharger
+    public interface IUSBCharger
     {
+        event EventHandler<USBChangedEventArgs> USBChangedEvent;
+        void StartCharge();
+        void StopCharge();
     }
 }

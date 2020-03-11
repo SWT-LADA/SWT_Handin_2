@@ -6,7 +6,27 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.USBChargerFolder
 {
-    class USBCharger
+    public class USBCharger : IUSBCharger
     {
+        public event EventHandler<USBChangedEventArgs> USBChangedEvent;
+        public void StartCharge()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopCharge()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetUSB(bool USB)
+        {
+
+        }
+
+        protected virtual void OnUSBChanged(USBChangedEventArgs e)
+        {
+            USBChangedEvent?.Invoke(this, e);
+        }
     }
 }

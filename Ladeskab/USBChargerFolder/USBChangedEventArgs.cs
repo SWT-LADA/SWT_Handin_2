@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ladeskab.USBChargerFolder
 {
-    class USBChargerEventArgs
+    public class USBChangedEventArgs : EventArgs
     {
+        public bool USB { get; set; }
     }
 }
