@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ladeskab
+namespace Ladeskab.FileWriterFolder
 {
-    public class Class1
+    class FileWriter
     {
-        public int testMetode(int value)
-        {
-            return value;
-        }
     }
 }

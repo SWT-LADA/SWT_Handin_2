@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>bac6b22b-7c4f-4ba7-90bf-4d13d5be697c</ProjectGuid>
+    <ProjectGuid>{BAC6B22B-7C4F-4BA7-90BF-4D13D5BE697C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ladeskab</RootNamespace>
@@ -31,24 +31,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System"/>
-    
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    
-    
-    <Reference Include="Microsoft.CSharp"/>
-    
-    <Reference Include="System.Data"/>
-    
-    <Reference Include="System.Net.Http"/>
-    
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Controller\ChargeControl.cs" />
+    <Compile Include="Controller\IChargeControl.cs" />
+    <Compile Include="Controller\StationControl.cs" />
+    <Compile Include="DisplayFolder\Display.cs" />
+    <Compile Include="DisplayFolder\IDisplay.cs" />
+    <Compile Include="DoorEvent\Door.cs" />
+    <Compile Include="DoorEvent\DoorChangedEventArgs.cs" />
+    <Compile Include="DoorEvent\IDoor.cs" />
+    <Compile Include="FileWriterFolder\FileWriter.cs" />
+    <Compile Include="FileWriterFolder\IFileWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RFIDEvent\IFRIDReader.cs" />
+    <Compile Include="RFIDEvent\IRFIDReader.cs" />
+    <Compile Include="RFIDEvent\RFIDChangedEventArgs.cs" />
+    <Compile Include="USBChargerFolder\IUSBCharger.cs" />
+    <Compile Include="USBChargerFolder\USBCharger.cs" />
+    <Compile Include="USBChargerFolder\USBChargerEventArgs.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
- </Project>
+</Project>
