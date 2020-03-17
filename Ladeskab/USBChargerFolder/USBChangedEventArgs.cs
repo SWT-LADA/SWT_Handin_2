@@ -8,6 +8,6 @@ namespace Ladeskab.USBChargerFolder
 {
     public class USBChangedEventArgs : EventArgs
     {
-        public bool USB { get; set; }
+        public double Current { set; get; }         // Value in mA (milliAmpere)
     }
 }

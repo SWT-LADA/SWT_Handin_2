@@ -10,7 +10,7 @@ namespace Ladeskab.DisplayFolder
     {
         public void WriteMessage(string msg)
         {
-
+            Console.WriteLine(msg);
         }
     }
 }
