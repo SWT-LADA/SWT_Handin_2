@@ -12,10 +12,11 @@ namespace Ladeskab.USBChargerFolder
         void StartCharge();
         void StopCharge();
 
-        //Direct access to the current current value
-        double CurrentValue { get; }
+        void SimulateConnected(bool connected);
+        void SimulateOverload(bool overload);
 
-        //Require connection status of the phone
-        bool Connected { get; }
+        double CurrentValue { get; }         //Direct access to the current current value
+        bool Connected { get; }         //Require connection status of the phone
+
     }
 }
