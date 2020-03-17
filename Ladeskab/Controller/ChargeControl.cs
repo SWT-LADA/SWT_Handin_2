@@ -9,6 +9,14 @@ namespace Ladeskab.Controller
 {
     public class ChargeControl : IChargeControl
     {
+        private IUSBCharger _usbCharger;
+        public bool _IsConnected { get; set; }
+
+        public ChargeControl()
+        {
+            _usbCharger = new USBCharger();
+        }
+
         private void HandleUSBChangedEvent(object s, USBChangedEventArgs e)
         {
 
@@ -16,17 +24,26 @@ namespace Ladeskab.Controller
 
         public bool IsConnected()
         {
-            return true;
+            _IsConnected = _usbCharger.Connected;
+
+            if (_IsConnected == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void StartCharge()
         {
-
+            _usbCharger.StartCharge();
         }
 
         public void StopCharge()
         {
-
+            _usbCharger.StopCharge();
         }
     }
 }

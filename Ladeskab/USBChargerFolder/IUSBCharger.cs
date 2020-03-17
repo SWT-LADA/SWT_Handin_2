@@ -11,5 +11,11 @@ namespace Ladeskab.USBChargerFolder
         event EventHandler<USBChangedEventArgs> USBChangedEvent;
         void StartCharge();
         void StopCharge();
+
+        //Direct access to the current current value
+        double CurrentValue { get; }
+
+        //Require connection status of the phone
+        bool Connected { get; }
     }
 }
