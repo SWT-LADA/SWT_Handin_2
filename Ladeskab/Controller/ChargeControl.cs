@@ -19,7 +19,14 @@ namespace Ladeskab.Controller
 
         private void HandleUSBChangedEvent(object s, USBChangedEventArgs e)
         {
-
+            if (e.Current != 0)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
 
         public bool IsConnected()
