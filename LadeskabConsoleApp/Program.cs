@@ -30,11 +30,11 @@ namespace LadeskabConsoleApp
                         break;
 
                     case 'O':
-                        door.SetDoorState();
+                        door.SetDoorState(true);
                         break;
 
                     case 'C':
-                        door.SetDoorState();
+                        door.SetDoorState(false);
                         break;
 
                     case 'R':
