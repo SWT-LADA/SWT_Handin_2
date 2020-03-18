@@ -8,11 +8,17 @@ namespace Ladeskab.RFIDEvent
 {
     public class RFIDReader : IRFIDReader
     {
+        private int _oldID;
+
         public event EventHandler<RFIDChangedEventArgs> RFIDChangedEvent;
 
-        public void SetRFID(int ID)
+        public void SetRFID(int ID) //hvordan testes den når den er void? 
         {
-
+            if (ID !=_oldID)
+            {
+                OnRFIDChanged(new RFIDChangedEventArgs {RFID = ID});
+                _oldID = ID; 
+            }
         }
 
         protected virtual void OnRFIDChanged(RFIDChangedEventArgs e)
