@@ -26,14 +26,18 @@ namespace Ladeskab.Controller
         private IDoor _door;
         private IDisplay _display;
         private IFileWriter _fileWriter;
-
         private int _oldID;
 
-        public StationControl(IDoor door, IRFIDReader rfidReader)
+        public StationControl(IDoor door, IRFIDReader rfidReader, IDisplay display, IChargeControl chargeControl, IUSBCharger charger, IFileWriter fileWriter) // Tilføjet parametre af Line 18/3 16.30
         {
             _state = LadeskabsState.Available;
             door.DoorChangedEvent += HandleDoorChangedEvent;
             rfidReader.RFIDChangedEvent += HandleRFIDChangedEvent;
+            _display = display; // Tilføjet af Line 18/3 16.30
+            _fileWriter = fileWriter; // Tilføjet af Line 18/3 16.30
+            _charger = charger; // Tilføjet af Line 18/3 16.30
+            _chargeControl = chargeControl; // Tilføjet af Line 18/3 16.30
+            _door = door; // Tilføjet af Line 18/3 16.30
         }
         private void HandleDoorChangedEvent(object s, DoorChangedEventArgs e)
         {
