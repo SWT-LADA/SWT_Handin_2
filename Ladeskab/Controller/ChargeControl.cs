@@ -15,6 +15,11 @@ namespace Ladeskab.Controller
         public bool _IsConnected { get; set; }
         private string msg;
 
+        private int status1;
+        private int status2;
+        private int status3;
+        private int status4;
+
         public ChargeControl(IUSBCharger usbCharger, IDisplay display )
         {
             _USBCharger = usbCharger;
@@ -25,27 +30,47 @@ namespace Ladeskab.Controller
 
         private void HandleUSBChangedEvent(object s, USBChangedEventArgs e)
         {
-            if (e.Current == 0)
+            if (e.Current == 0 && status1 == 0)
             {
                 msg = "Der er ingen forbindelse til en telefon, eller ladning er ikke startet " + e.Current;
                 _display.WriteMessage(msg);
+
+                status1 = 1;
+                status2 = 0;
+                status3 = 0;
+                status4 = 0;
             }
-            else if(e.Current > 0 && e.Current <= 5)
+            else if (e.Current > 0 && e.Current <= 5 && status2 == 0)
             {
                 msg = "Telefonen er fuldt opladet " + e.Current;
                 _display.WriteMessage(msg);
+
+                status1 = 0;
+                status2 = 1;
+                status3 = 0;
+                status4 = 0;
             }
-            else if (e.Current > 5 && e.Current <= 500)
+            else if (e.Current > 5 && e.Current <= 500 && status3 == 0)
             {
-                 msg = "Opladningen foregår normalt " + e.Current;
+                msg = "Opladningen foregår normalt " + e.Current;
                 _display.WriteMessage(msg);
+
+                status1 = 0;
+                status2 = 0;
+                status3 = 1;
+                status4 = 0;
             }
-            else if (e.Current > 500)
+            else if (e.Current > 500 && status4 == 0)
             {
                 msg = "Fejlmeddelelse: Overload current!" + e.Current;
                 _display.WriteMessage(msg);
+
+                status1 = 0;
+                status2 = 0;
+                status3 = 0;
+                status4 = 1;
             }
-            else
+            else if (e.Current < 0)
             {
                 throw new System.ArgumentException();
             }

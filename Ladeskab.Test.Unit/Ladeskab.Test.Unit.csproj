@@ -71,6 +71,7 @@
     <Compile Include="DoorUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StationControlUnitTest.cs" />
+    <Compile Include="USBChargerUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
