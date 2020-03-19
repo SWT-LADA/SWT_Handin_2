@@ -11,17 +11,21 @@ namespace Ladeskab.Test.Unit
     [TestFixture]
     class DoorUnitTest
     {
-        private Door door; 
+        private Door _uut; 
         [SetUp]
         public void Setup()
         {
-            door = new Door();
+            _uut = new Door();
         }
 
-        [Test]
-        public void SetDoorState_true_returntrue() //Denne er ikke testet færdig - den giver succes lige meget hvad - kan ikke debugge? 
+        [TestCase(false, false, false)]
+        [TestCase(false, true, true)]
+        [TestCase(true, false, false)]
+        [TestCase(true, true, true)]
+        public void Unit_test_SetDoorState_DifferentDoorStates_DoorStateCorrect(bool originalState, bool newState, bool expectedState) 
         {
-            Assert.That(door.SetDoorState(false), Is.EqualTo(true));
+            _uut.SetDoorState(originalState);
+            Assert.That(_uut.SetDoorState(newState), Is.EqualTo(expectedState));
         }
     }
 }

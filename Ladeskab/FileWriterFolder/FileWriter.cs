@@ -12,7 +12,7 @@ namespace Ladeskab.FileWriterFolder
         private string logFile = "logfile.txt";
         public void LogDoorLocked(int ID)
         {
-            using (var writer = File.AppendText(logFile)) // Jeg er ikke sikker på hvor filen bliver gemt henne
+            using (var writer = File.AppendText(logFile)) // Jeg er ikke sikker på hvor filen bliver gemt henne /Line
             {
                 writer.WriteLine(DateTime.Now + ": Door locked with RFID: {0}", ID);
                 Console.WriteLine("Døren er blevet låst"); // Skal slettes inden aflevering!! /Line
