@@ -66,6 +66,52 @@ namespace Ladeskab.Test.Unit
         //    Assert.That(lastValue, Is.LessThan(500.0));
         //}
 
+        [Test]
+        public void StopCharge_IsCharging_ReceivesZeroValue()
+        {
+            double lastValue = 1000;
+            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(500);
+
+            _uut.StopCharge();
+
+            Assert.That(lastValue, Is.EqualTo(0.0));
+        }
+
+        [Test]
+        public void StopCharge_IsCharging_PropertyIsZero()
+        {
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(300);
+
+            _uut.StopCharge();
+
+            Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
+        }
+
+        //[Test]
+        //public void StopCharge_IsCharging_ReceivesNoMoreValues()
+        //{
+        //    double lastValue = 1000;
+        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+        //    _uut.StartCharge();
+
+        //    System.Threading.Thread.Sleep(300);
+
+        //    _uut.StopCharge();
+        //    lastValue = 1000;
+
+        //    // Wait for a tick
+        //    System.Threading.Thread.Sleep(300);
+
+        //    // No new value received
+        //    Assert.That(lastValue, Is.EqualTo(1000.0));
+        //}
 
     }
 }
