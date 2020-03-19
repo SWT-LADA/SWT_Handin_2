@@ -19,9 +19,9 @@ namespace LadeskabConsoleApp
             Door door = new Door();
             RFIDReader rfidReader = new RFIDReader();
             Display display = new Display(); // Tilføjet af Line 18/3 16.30
-            ChargeControl chargeControl = new ChargeControl(); // Tilføjet af Line 18/3 16.30
             USBCharger usbCharger = new USBCharger(); // Tilføjet af Line 18/3 16.30
             FileWriter fileWriter = new FileWriter(); // Tilføjet af Line 18/3 16.30
+            ChargeControl chargeControl = new ChargeControl(usbCharger, display); // Tilføjet af Line 18/3 16.30
             StationControl stationControl = new StationControl(door, rfidReader, display, chargeControl, usbCharger, fileWriter); // Tilføjet af Line 18/3 16.30
 
             System.Console.WriteLine("E = exit, O = open, C = close, R = read");

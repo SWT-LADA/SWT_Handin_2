@@ -13,7 +13,7 @@ namespace Ladeskab.USBChargerFolder
         private const double MaxCurrent = 500.0; // mA
         private const double FullyChargedCurrent = 2.5; // mA 
         private const double OverloadCurrent = 750; // mA
-        private const int ChargeTimeMinutes = 20; // Det tager 20 minutter at oplade telefonen
+        private const int ChargeTimeMinutes = 1; // Det tager 20 minutter at oplade telefonen ÆNDRE HER!!
         private const int CurrentTickInterval = 250; // Sætter timer interval til 0.25 sekunder (250 ms)
 
         public event EventHandler<USBChangedEventArgs> USBChangedEvent;
