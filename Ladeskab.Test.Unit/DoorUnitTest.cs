@@ -18,9 +18,10 @@ namespace Ladeskab.Test.Unit
             door = new Door();
         }
 
+        [Test]
         public void SetDoorState_true_returntrue() //Denne er ikke testet færdig - den giver succes lige meget hvad - kan ikke debugge? 
         {
-            Assert.That(door.SetDoorState(true), Is.EqualTo(true));
+            Assert.That(door.SetDoorState(false), Is.EqualTo(true));
         }
     }
 }
