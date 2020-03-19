@@ -12,22 +12,25 @@ namespace Ladeskab.Test.Unit
     [TestFixture]
     public class ChargeControlUnitTest
     {
-        //private IChargeControl _uut;
-        //private IDisplay _display;
-        //private IUSBCharger _usbCharger;
+        private IChargeControl _uut;
+        private IDisplay _display;
+        private IUSBCharger _usbCharger;
 
-        //[SetUp]
-        //public void Setup()
-        //{
-        //    _display = Substitute.For<IDisplay>();
-        //    _usbCharger = Substitute.For<IUSBCharger>();
-        //    _uut = new ChargeControl(_usbCharger, _display);
-        //}
+        [SetUp]
+        public void Setup()
+        {
+            _display = Substitute.For<IDisplay>();
+            _usbCharger = Substitute.For<IUSBCharger>();
+            _uut = new ChargeControl(_usbCharger, _display);
+        }
 
-        //[Test]
-        //public void IsConnected_IsTrue()
-        //{
-        //    Assert.That(_uut.IsConnected, Is.True);
-        //}
+        [TestCase(true, true)]
+        [TestCase(false, false)]
+        public void Unit_test_SIsConnected_DifferentStates(bool state, bool result)
+        {
+            //_usbCharger.SimulateConnected(state);
+
+            //Assert.That(_uut.IsConnected, Is.EqualTo(result));
+        }
     }
 }
