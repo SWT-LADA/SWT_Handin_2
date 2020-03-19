@@ -37,12 +37,57 @@ namespace Ladeskab.Test.Unit
             _uut = new StationControl(_door, _rfidReader, _display, _chargeControl, _usbCharger, _fileWriter);
         }
 
+
         [Test]
-        public void Unit_test_HandleRFIDChangedEvent()
+        public void Unit_HandleRFIDChangedEvent_RFIDChangedEventRaised_MethodCallCorrect1()
         {
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
             _door.Received().LockDoor();
+            _usbCharger.Received().StartCharge();
+            _fileWriter.Received().LogDoorLocked(10);
+            _display.Received().WriteMessage("Box is taken and locked with RFID: " + 10);
         }
+
+        [Test]
+        public void Unit_HandleRFIDChangedEvent_WhenAvailable_RFIDChangedEventRaised_MethodCallCorrect2()
+        {
+            _chargeControl.IsConnected().Returns(false);
+            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+            _door.DidNotReceive().LockDoor();
+            _usbCharger.DidNotReceive().StartCharge();
+            _fileWriter.DidNotReceive().LogDoorLocked(10);
+            _display.Received().WriteMessage("Phone not connected properly, try connecting again");
+        }
+
+        [Test]
+        public void Unit_HandleRFIDChangedEvent_WhenLocked_RFIDChangedEventRaised_MethodCallCorrect3()
+        {
+            _chargeControl.IsConnected().Returns(true);
+            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+            _usbCharger.Received().StopCharge();
+            _door.Received().UnlockDoor();
+            _fileWriter.Received().LogDoorUnlocked(10);
+            _display.Received().WriteMessage("Remove phone");
+
+
+        }
+
+        [Test]
+        public void Unit_HandleRFIDChangedEvent_WhenLocked_RFIDChangedEventRaised_MethodCallCorrect4()
+        {
+            _chargeControl.IsConnected().Returns(true);
+            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 5 });
+            _usbCharger.DidNotReceive().StopCharge();
+            _door.DidNotReceive().UnlockDoor();
+            _fileWriter.DidNotReceive().LogDoorUnlocked(10);
+            _display.Received().WriteMessage("RFID error");
+
+
+        }
+
+        
     }
 }
