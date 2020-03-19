@@ -37,12 +37,12 @@ namespace Ladeskab.Test.Unit
             _uut = new StationControl(_door, _rfidReader, _display, _chargeControl, _usbCharger, _fileWriter);
         }
 
-        [Test]
-        public void Unit_test_HandleRFIDChangedEvent()
-        {
-            _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs {RFID = 10});
-            //Assert.That();
+        //[Test]
+        //public void Unit_test_HandleRFIDChangedEvent()
+        //{
+        //    _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs {RFID = 10});
+        //    //Assert.That();
             
-        }
+        //}
     }
 }

@@ -24,11 +24,11 @@ namespace Ladeskab.Test.Unit
             _uut = new ChargeControl(_usbCharger, _display);
         }
 
-        [Test]
-        public void IsConnected_IsTrue()
-        {
-            Assert.That(_uut.IsConnected, Is.True);
-        }
+        //[Test]
+        //public void IsConnected_IsTrue()
+        //{
+        //    Assert.That(_uut.IsConnected, Is.True);
+        //}
     }
 
     public class USBChargerUnitTest
