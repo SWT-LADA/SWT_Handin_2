@@ -70,7 +70,37 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StartCharge_MoreThanSixtySeconds()
+        public void Unit_test_StartCharge_IfNotConnected()
+        {
+            double lastValue = 1000;
+
+            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+            _uut.SimulateConnected(false);
+
+            _uut.StartCharge();
+            
+            System.Threading.Thread.Sleep(1000);
+
+            Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
+        }
+
+        //[Test]
+        //public void Unit_test_StartCharge_MoreThanSixtySeconds()
+        //{
+        //    double lastValue = 1000;
+
+        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+        //    _uut.StartCharge();
+
+        //    System.Threading.Thread.Sleep(63000);
+
+        //    Assert.That(lastValue, Is.EqualTo(2.5));
+        //}
+
+        [Test]
+        public void Unit_test_StopCharge_LastValueEqualToZero()
         {
             double lastValue = 1000;
 
@@ -78,11 +108,28 @@ namespace Ladeskab.Test.Unit
 
             _uut.StartCharge();
 
-            System.Threading.Thread.Sleep(63000);
+            System.Threading.Thread.Sleep(1000);
 
-            Assert.That(lastValue, Is.EqualTo(2.5));
+            _uut.StopCharge();
+
+            Assert.That(lastValue, Is.EqualTo(0.0));
         }
 
+        [Test]
+        public void Unit_test_StopCharge_CurrentValueEqualToZero()
+        {
+            double lastValue = 1000;
+
+            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(1000);
+
+            _uut.StopCharge();
+
+            Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
+        }
 
         //*********************************
         //[Test]
