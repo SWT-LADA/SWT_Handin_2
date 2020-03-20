@@ -24,13 +24,41 @@ namespace Ladeskab.Test.Unit
             _uut = new ChargeControl(_usbCharger, _display);
         }
 
-        [TestCase(true, true)]
-        [TestCase(false, false)]
-        public void Unit_test_SIsConnected_DifferentStates(bool state, bool result)
+        [Test]
+        public void Unit_test_StartCharge_IsCalled()
         {
-            //_usbCharger.SimulateConnected(state);
+            _uut.StartCharge();
 
-            //Assert.That(_uut.IsConnected, Is.EqualTo(result));
+            _usbCharger.Received(1).StartCharge();
         }
+
+        [Test]
+        public void Unit_test_StopCharge_IsCalled()
+        {
+            _uut.StopCharge();
+
+            _usbCharger.Received(1).StopCharge();
+        }
+
+        //[Test]
+        //public void Unit_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
+        //{
+        //    _usbCharger.
+        //    _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs {Current = 300});
+
+        //}
+
+
+
+    //[TestCase(true, true)]
+        //[TestCase(false, false)]
+        //public void Unit_test_IsConnected_DifferentStates(bool state, bool result)
+        //{
+        //    _usbCharger.SimulateConnected(state);
+
+        //    _uut.StartCharge();
+
+        //    Assert.AreEqual(result,_uut.IsConnected());
+        //}
     }
 }
