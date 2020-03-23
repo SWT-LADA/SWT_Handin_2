@@ -23,7 +23,7 @@ namespace Ladeskab.Test.Unit
 
         [TestCase(true, true)]
         [TestCase(false, false)]
-        public void Unit_test_SimulateConnected_DifferentStates(bool state, bool result)
+        public void Test_SimulateConnected_DifferentStates(bool state, bool result)
         {
             _uut.SimulateConnected(state);
 
@@ -32,7 +32,7 @@ namespace Ladeskab.Test.Unit
 
         [TestCase(true, 750)]
         [TestCase(false, 500)]
-        public void Unit_test_SimulateOverload_DifferentStates(bool state, int result)
+        public void Test_SimulateOverload_DifferentStates(bool state, int result)
         {
             _uut.SimulateOverload(state);
 
@@ -42,7 +42,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StartCharge_ZeroSeconds()
+        public void Test_StartCharge_ZeroSeconds()
         {
             double lastValue = 1000;
 
@@ -56,7 +56,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StartCharge_OneSecond()
+        public void Test_StartCharge_OneSecond()
         {
             double lastValue = 1000;
 
@@ -70,7 +70,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StartCharge_IfNotConnected()
+        public void Test_StartCharge_IfNotConnected()
         {
             double lastValue = 1000;
 
@@ -86,7 +86,7 @@ namespace Ladeskab.Test.Unit
         }
 
         //[Test]
-        //public void Unit_test_StartCharge_MoreThanSixtySeconds()
+        //public void Test_StartCharge_MoreThanSixtySeconds()
         //{
         //    double lastValue = 1000;
 
@@ -100,7 +100,7 @@ namespace Ladeskab.Test.Unit
         //}
 
         [Test]
-        public void Unit_test_StopCharge_LastValueEqualToZero()
+        public void Test_StopCharge_LastValueEqualToZero()
         {
             double lastValue = 1000;
 
@@ -116,7 +116,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StopCharge_CurrentValueEqualToZero()
+        public void Test_StopCharge_CurrentValueEqualToZero()
         {
             double lastValue = 1000;
 

@@ -25,7 +25,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StartCharge_IsCalled()
+        public void Test_StartCharge_IsCalled()
         {
             _uut.StartCharge();
 
@@ -33,7 +33,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_test_StopCharge_IsCalled()
+        public void Test_StopCharge_IsCalled()
         {
             _uut.StopCharge();
 
@@ -41,7 +41,7 @@ namespace Ladeskab.Test.Unit
         }
 
         //[Test]
-        //public void Unit_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
+        //public void Test_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
         //{
         //    _usbCharger.
         //    _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs {Current = 300});
@@ -52,7 +52,7 @@ namespace Ladeskab.Test.Unit
 
     //[TestCase(true, true)]
         //[TestCase(false, false)]
-        //public void Unit_test_IsConnected_DifferentStates(bool state, bool result)
+        //public void Test_IsConnected_DifferentStates(bool state, bool result)
         //{
         //    _usbCharger.SimulateConnected(state);
 

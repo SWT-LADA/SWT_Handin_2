@@ -33,11 +33,11 @@ namespace Ladeskab.Controller
             _state = LadeskabsState.Available;
             door.DoorChangedEvent += HandleDoorChangedEvent;
             rfidReader.RFIDChangedEvent += HandleRFIDChangedEvent;
-            _display = display; // Tilføjet af Line 18/3 16.30
-            _fileWriter = fileWriter; // Tilføjet af Line 18/3 16.30
-            _charger = charger; // Tilføjet af Line 18/3 16.30
-            _chargeControl = chargeControl; // Tilføjet af Line 18/3 16.30
-            _door = door; // Tilføjet af Line 18/3 16.30
+            _display = display; 
+            _fileWriter = fileWriter;
+            _charger = charger;
+            _chargeControl = chargeControl;
+            _door = door;
         }
         private void HandleDoorChangedEvent(object s, DoorChangedEventArgs e)
         {

@@ -22,7 +22,7 @@ namespace Ladeskab.Test.Unit
         [TestCase(false, true, true)]
         [TestCase(true, false, false)]
         [TestCase(true, true, true)]
-        public void Unit_test_SetDoorState_DifferentDoorStates_DoorStateCorrect(bool originalState, bool newState, bool expectedState) 
+        public void Test_SetDoorState_DifferentDoorStates_DoorStateCorrect(bool originalState, bool newState, bool expectedState) 
         {
             _uut.SetDoorState(originalState);
             Assert.That(_uut.SetDoorState(newState), Is.EqualTo(expectedState));

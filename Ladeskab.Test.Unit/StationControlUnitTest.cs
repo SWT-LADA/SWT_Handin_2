@@ -39,14 +39,14 @@ namespace Ladeskab.Test.Unit
 
         //Overvejer, om IDoor burde indeholder SetDoorState(bool state), da jeg ellers ikke har kontrol over det - Anna
         [Test]
-        public void Unit_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect1()
+        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect1()
         {
             //_door.SetDoorState(false);
             _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
             _display.Received().WriteMessage("Read RFID");
         }
         //[Test] //udkommenteret for nu, da der formentlig skal ændres i IDoor koden/der hvor event raises - Anna
-        //public void Unit_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect2()
+        //public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect2()
         //{
         //    //_door.SetDoorState(true);
         //    _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
@@ -54,7 +54,7 @@ namespace Ladeskab.Test.Unit
         //}
 
         [Test]
-        public void Unit_HandleRFIDChangedEvent_RFIDChangedEventRaised_MethodCallCorrect1()
+        public void Test_HandleRFIDChangedEvent_WhenAvailableAndChargeControlConnected_RFIDChangedEventRaised_MethodCallCorrect()
         {
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
@@ -65,7 +65,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_HandleRFIDChangedEvent_WhenAvailable_RFIDChangedEventRaised_MethodCallCorrect2()
+        public void Test_HandleRFIDChangedEvent_WhenAvailableAndChargeControlNotConnected_RFIDChangedEventRaised_MethodCallCorrect()
         {
             _chargeControl.IsConnected().Returns(false);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
@@ -76,7 +76,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_HandleRFIDChangedEvent_WhenLocked_RFIDChangedEventRaised_MethodCallCorrect3()
+        public void Test_HandleRFIDChangedEvent_WhenLockedAndRfidIdentical_RFIDChangedEventRaised_MethodCallCorrect()
         {
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
@@ -90,7 +90,7 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
-        public void Unit_HandleRFIDChangedEvent_WhenLocked_RFIDChangedEventRaised_MethodCallCorrect4()
+        public void Test_HandleRFIDChangedEvent_WhenLockedAndRfidNotIdentical_RFIDChangedEventRaised_MethodCallCorrect()
         {
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
@@ -99,10 +99,6 @@ namespace Ladeskab.Test.Unit
             _door.DidNotReceive().UnlockDoor();
             _fileWriter.DidNotReceive().LogDoorUnlocked(10);
             _display.Received().WriteMessage("RFID error");
-
-
         }
-
-        
     }
 }
