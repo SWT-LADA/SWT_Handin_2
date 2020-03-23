@@ -11,5 +11,8 @@ namespace Ladeskab.Controller
         bool IsConnected();
         void StartCharge();
         void StopCharge();
+
+        bool _IsConnected { get; set; }
+
     }
 }

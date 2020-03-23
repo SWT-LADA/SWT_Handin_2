@@ -53,7 +53,21 @@ namespace Ladeskab.Test.Unit
             _display.Received().WriteMessage(msg);
         }
 
+        [Test]
+        public void Test_HandleUSBChangedEvent_USBChangedEventRaised_ExceptionThrown()
+        {
+            Assert.Throws<ArgumentException>(() => _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs { Current = -1 }));
+        }
 
+        [TestCase(false, false)]
+        [TestCase(true, true)]
+
+        public void Test_IsConnectedProperty_DifferentStates(bool input, bool result)
+        {
+            _uut._IsConnected = input;
+
+            Assert.AreEqual(result,_uut._IsConnected);
+        }
 
         //[TestCase(true, true)]
         //public void Test_IsConnected_DifferentStates(bool state, bool result)
