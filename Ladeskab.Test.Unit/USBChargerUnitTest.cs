@@ -31,48 +31,69 @@ namespace Ladeskab.Test.Unit
         }
 
         [TestCase(true, 750)]
-        [TestCase(false, 500)]
-        public void Test_SimulateOverload_DifferentStates(bool state, int result)
+        public void Test_SimulateOverload_StartCharge_StateTrue(bool state, int currentValueResult)
         {
+            _uut.StartCharge();
+
             _uut.SimulateOverload(state);
-
-            _uut.StartCharge();
-
-            Assert.That(_uut.CurrentValue, Is.EqualTo(result));
-        }
-
-        [Test]
-        public void Test_StartCharge_ZeroSeconds()
-        {
-            double lastValue = 1000;
-
-            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-            _uut.StartCharge();
-
-            System.Threading.Thread.Sleep(0);
-
-            Assert.That(lastValue, Is.EqualTo(500));
-        }
-
-        [Test]
-        public void Test_StartCharge_OneSecond()
-        {
-            double lastValue = 1000;
-
-            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-            _uut.StartCharge();
 
             System.Threading.Thread.Sleep(1000);
 
-            Assert.That(lastValue, Is.LessThan(500));
+            Assert.That(_uut.CurrentValue, Is.EqualTo(currentValueResult));
+        }
+
+        [TestCase(false, 500)]
+        public void Test_SimulateOverload_StartCharge_StateFalse(bool state, int currentValueResult)
+        {
+            _uut.StartCharge();
+
+            _uut.SimulateOverload(state);
+
+            System.Threading.Thread.Sleep(1000);
+
+            Assert.That(_uut.CurrentValue, Is.LessThan(currentValueResult));
+        }
+
+        [Test]
+        public void Test_CurentValue_IsZero()
+        {
+            Assert.That(_uut.CurrentValue, Is.Zero);
+        }
+
+        [TestCase(0, 500)]
+        [TestCase(6250, 2.5)]
+        public void Test_StartCharge_CurrentValue_IsEqualTo(int time, double currentValue)
+        {
+            double lastValue = 0;
+
+            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(time);
+
+            Assert.That(lastValue, Is.EqualTo(currentValue));
+        }
+
+        [TestCase(1000, 500)]
+        [TestCase(6000, 50)]
+        public void Test_StartCharge_CurrentValue_IsLessThan(int time, int currentValue)
+        {
+            double lastValue = 0;
+
+            _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
+
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(time);
+
+            Assert.That(lastValue, Is.LessThan(currentValue));
         }
 
         [Test]
         public void Test_StartCharge_IfNotConnected()
         {
-            double lastValue = 1000;
+            double lastValue = 0;
 
             _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
 
@@ -85,265 +106,56 @@ namespace Ladeskab.Test.Unit
             Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
         }
 
-        //[Test]
-        //public void Test_StartCharge_MoreThanSixtySeconds()
-        //{
-        //    double lastValue = 1000;
-
-        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(63000);
-
-        //    Assert.That(lastValue, Is.EqualTo(2.5));
-        //}
-
-        [Test]
-        public void Test_StopCharge_LastValueEqualToZero()
+        [TestCase(0,0.0)]
+        [TestCase(1000, 0.0)]
+        public void Test_StopCharge_LastValueEqualToZero(int time, double currentValue)
         {
-            double lastValue = 1000;
+            double lastValue = 0;
 
             _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
 
             _uut.StartCharge();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(time);
 
             _uut.StopCharge();
 
-            Assert.That(lastValue, Is.EqualTo(0.0));
+            Assert.That(lastValue, Is.EqualTo(currentValue));
         }
 
-        [Test]
-        public void Test_StopCharge_CurrentValueEqualToZero()
+        [TestCase(0, 0.0)]
+        [TestCase(1000, 0.0)]
+        public void Test_StopCharge_CurrentValueEqualToZero(int time, double currentValue)
         {
-            double lastValue = 1000;
+            double lastValue = 0;
 
             _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
 
             _uut.StartCharge();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(time);
 
             _uut.StopCharge();
 
-            Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
+            Assert.That(_uut.CurrentValue, Is.EqualTo(currentValue));
         }
 
-        //*********************************
-        //[Test]
-        //public void ctor_IsConnected()
-        //{
-        //    Assert.That(_uut.Connected, Is.True);
-        //}
+        [TestCase(0)]
+        [TestCase(300)]
+        [TestCase(1100)]
+        [TestCase(1300)]
+        public void Test_StartCharge_ReceivedSeveralValues_DifferentValues(int time)
+        {
+            int numValues = 0;
+            int result = (time / 250) + 1;
 
-        //[Test]
-        //public void ctor_CurentValueIsZero()
-        //{
-        //    Assert.That(_uut.CurrentValue, Is.Zero);
-        //}
+            _uut.USBChangedEvent += (o, args) => numValues++;
 
-        //[Test]
-        //public void SimulateDisconnected_ReturnsDisconnected()
-        //{
-        //    _uut.SimulateConnected(false);
-        //    Assert.That(_uut.Connected, Is.False);
-        //}
+            _uut.StartCharge();
 
-        //[Test]
-        //public void Started_WaitSomeTime_ReceivedSeveralValues()
-        //{
-        //    int numValues = 0;
-        //    _uut.USBChangedEvent += (o, args) => numValues++;
+            System.Threading.Thread.Sleep(time);
 
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(1100);
-
-        //    Assert.That(numValues, Is.GreaterThan(4));
-        //}
-
-        //[Test]
-        //public void Started_WaitSomeTime_ReceivedChangedValue()
-        //{
-        //    double lastValue = 1000;
-        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(300);
-
-        //    Assert.That(lastValue, Is.LessThan(500.0));
-        //}
-
-        //[Test]
-        //public void StartedNoEventReceiver_WaitSomeTime_PropertyChangedValue()
-        //{
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(300);
-
-        //    Assert.That(_uut.CurrentValue, Is.LessThan(500.0));
-        //}
-
-        //[Test]
-        //public void Started_WaitSomeTime_PropertyMatchesReceivedValue()
-        //{
-        //    double lastValue = 1000;
-        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(1100);
-
-        //    Assert.That(lastValue, Is.EqualTo(_uut.CurrentValue));
-        //}
-
-
-        //[Test]
-        //public void Started_SimulateOverload_ReceivesHighValue()
-        //{
-        //    ManualResetEvent pause = new ManualResetEvent(false);
-        //    double lastValue = 0;
-
-        //    _uut.USBChangedEvent += (o, args) =>
-        //    {
-        //        lastValue = args.Current;
-        //        pause.Set();
-        //    };
-
-        //    // Start
-        //    _uut.StartCharge();
-
-        //    // Next value should be high
-        //    _uut.SimulateOverload(true);
-
-        //    // Reset event
-        //    pause.Reset();
-
-        //    // Wait for next tick, should send overloaded value
-        //    pause.WaitOne(300);
-
-        //    Assert.That(lastValue, Is.GreaterThan(500.0));
-        //}
-
-        //[Test]
-        //public void Started_SimulateDisconnected_ReceivesZero()
-        //{
-        //    ManualResetEvent pause = new ManualResetEvent(false);
-        //    double lastValue = 1000;
-
-        //    _uut.USBChangedEvent += (o, args) =>
-        //    {
-        //        lastValue = args.Current;
-        //        pause.Set();
-        //    };
-
-
-        //    // Start
-        //    _uut.StartCharge();
-
-        //    // Next value should be zero
-        //    _uut.SimulateConnected(false);
-
-        //    // Reset event
-        //    pause.Reset();
-
-        //    // Wait for next tick, should send disconnected value
-        //    pause.WaitOne(300);
-
-        //    Assert.That(lastValue, Is.Zero);
-        //}
-
-        //[Test]
-        //public void SimulateOverload_Start_ReceivesHighValueImmediately()
-        //{
-        //    double lastValue = 0;
-
-        //    _uut.USBChangedEvent += (o, args) =>
-        //    {
-        //        lastValue = args.Current;
-        //    };
-
-        //    // First value should be high
-        //    _uut.SimulateOverload(true);
-
-        //    // Start
-        //    _uut.StartCharge();
-
-        //    // Should not wait for first tick, should send overload immediately
-
-        //    Assert.That(lastValue, Is.GreaterThan(500.0));
-        //}
-
-        //[Test]
-        //public void SimulateDisconnected_Start_ReceivesZeroValueImmediately()
-        //{
-        //    double lastValue = 1000;
-
-        //    _uut.USBChangedEvent += (o, args) =>
-        //    {
-        //        lastValue = args.Current;
-        //    };
-
-        //    // First value should be high
-        //    _uut.SimulateConnected(false);
-
-        //    // Start
-        //    _uut.StartCharge();
-
-        //    // Should not wait for first tick, should send zero immediately
-
-        //    Assert.That(lastValue, Is.Zero);
-        //}
-
-        //[Test]
-        //public void StopCharge_IsCharging_ReceivesZeroValue()
-        //{
-        //    double lastValue = 1000;
-        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(300);
-
-        //    _uut.StopCharge();
-
-        //    Assert.That(lastValue, Is.EqualTo(0.0));
-        //}
-
-        //[Test]
-        //public void StopCharge_IsCharging_PropertyIsZero()
-        //{
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(300);
-
-        //    _uut.StopCharge();
-
-        //    Assert.That(_uut.CurrentValue, Is.EqualTo(0.0));
-        //}
-
-        //[Test]
-        //public void StopCharge_IsCharging_ReceivesNoMoreValues()
-        //{
-        //    double lastValue = 1000;
-        //    _uut.USBChangedEvent += (o, args) => lastValue = args.Current;
-
-        //    _uut.StartCharge();
-
-        //    System.Threading.Thread.Sleep(300);
-
-        //    _uut.StopCharge();
-        //    lastValue = 1000;
-
-        //    // Wait for a tick
-        //    System.Threading.Thread.Sleep(300);
-
-        //    // No new value received
-        //    Assert.That(lastValue, Is.EqualTo(1000.0));
-        //}
-
+            Assert.That(numValues, Is.EqualTo(result));
+        }
     }
 }
