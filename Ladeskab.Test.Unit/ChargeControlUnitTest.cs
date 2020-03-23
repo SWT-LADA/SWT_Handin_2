@@ -40,11 +40,17 @@ namespace Ladeskab.Test.Unit
             _usbCharger.Received(1).StopCharge();
         }
 
-        [Test]
-        public void Test_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
+        [TestCase(0, "** Telefon skal fjernes, telefon ikke tilsluttet eller ladning ikke startet **")]
+        [TestCase(1, "** Telefon tilsluttet - Telefonen er fuldt opladet **")]
+        [TestCase(5, "** Telefon tilsluttet - Telefonen er fuldt opladet **")]
+        [TestCase(6, "** Telefon tilsluttet - Opladningen foregår normalt **")]
+        [TestCase(500, "** Telefon tilsluttet - Opladningen foregår normalt **")]
+        [TestCase(501, "** Fejlmeddelelse: Overload current! **")]
+
+        public void Test_HandleUSBChangedEvent_USBChangedEventRaised_DifferentCurrentValues(int currentValue, string msg)
         {
-            _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs { Current = 499 });
-            _display.Received().WriteMessage("** Telefon tilsluttet - Opladningen foregår normalt **");
+            _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs { Current = currentValue });
+            _display.Received().WriteMessage(msg);
         }
 
 
