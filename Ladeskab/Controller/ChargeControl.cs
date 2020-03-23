@@ -32,7 +32,7 @@ namespace Ladeskab.Controller
         {
             if (e.Current == 0 && status1 == 0)
             {
-                msg = "Der er ingen forbindelse til en telefon, eller ladning er ikke startet " + e.Current;
+                msg = "** Telefon skal fjernes, telefon ikke tilsluttet eller ladning ikke startet **";
                 _display.WriteMessage(msg);
 
                 status1 = 1;
@@ -42,7 +42,7 @@ namespace Ladeskab.Controller
             }
             else if (e.Current > 0 && e.Current <= 5 && status2 == 0)
             {
-                msg = "Telefonen er fuldt opladet " + e.Current;
+                msg = "** Telefon tilsluttet - Telefonen er fuldt opladet **";
                 _display.WriteMessage(msg);
 
                 status1 = 0;
@@ -52,7 +52,7 @@ namespace Ladeskab.Controller
             }
             else if (e.Current > 5 && e.Current <= 500 && status3 == 0)
             {
-                msg = "Opladningen foregår normalt " + e.Current;
+                msg = "** Telefon tilsluttet - Opladningen foregår normalt **";
                 _display.WriteMessage(msg);
 
                 status1 = 0;
@@ -62,7 +62,7 @@ namespace Ladeskab.Controller
             }
             else if (e.Current > 500 && status4 == 0)
             {
-                msg = "Fejlmeddelelse: Overload current!" + e.Current;
+                msg = "** Fejlmeddelelse: Overload current! **";
                 _display.WriteMessage(msg);
 
                 status1 = 0;

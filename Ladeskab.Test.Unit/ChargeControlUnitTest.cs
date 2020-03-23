@@ -40,25 +40,21 @@ namespace Ladeskab.Test.Unit
             _usbCharger.Received(1).StopCharge();
         }
 
-        //[Test]
-        //public void Test_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
-        //{
-        //    _usbCharger.
-        //    _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs {Current = 300});
-
-        //}
-
+        [Test]
+        public void Test_HandleUSBChangedEvent_USBChangedEventRaised_MethodCallCorrect1()
+        {
+            _usbCharger.USBChangedEvent += Raise.EventWith(new USBChangedEventArgs { Current = 499 });
+            _display.Received().WriteMessage("** Telefon tilsluttet - Opladningen foregår normalt **");
+        }
 
 
-    //[TestCase(true, true)]
-        //[TestCase(false, false)]
+
+        //[TestCase(true, true)]
         //public void Test_IsConnected_DifferentStates(bool state, bool result)
         //{
-        //    _usbCharger.SimulateConnected(state);
+        //    _usbCharger.SimulateConnected(true);
 
-        //    _uut.StartCharge();
-
-        //    Assert.AreEqual(result,_uut.IsConnected());
+        //    Assert.AreEqual(result, _uut.IsConnected());
         //}
     }
 }
