@@ -55,6 +55,19 @@ namespace Ladeskab.Test.Unit
         }
 
         [Test]
+        public void Test_ConnectedTrue_OverloadTrue_CurrentValueGreaterThan750()
+        {
+            _uut.SimulateOverload(true);
+            _uut.SimulateConnected(true);
+
+            _uut.StartCharge();
+
+            System.Threading.Thread.Sleep(1000);
+
+            Assert.That(_uut.CurrentValue, Is.GreaterThanOrEqualTo(750));
+        }
+
+        [Test]
         public void Test_CurentValue_IsZero()
         {
             Assert.That(_uut.CurrentValue, Is.Zero);
