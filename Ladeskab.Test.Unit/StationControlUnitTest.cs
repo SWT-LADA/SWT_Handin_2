@@ -41,17 +41,17 @@ namespace Ladeskab.Test.Unit
         [Test]
         public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect1()
         {
-            //_door.SetDoorState(false);
+            _door.SetDoorState(false);
             _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
             _display.Received().WriteMessage("Read RFID");
         }
-        //[Test] //udkommenteret for nu, da der formentlig skal ændres i IDoor koden/der hvor event raises - Anna
-        //public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect2()
-        //{
-        //    //_door.SetDoorState(true);
-        //    _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
-        //    _display.Received().WriteMessage("Connect phone and close the door");
-        //}
+        [Test] //udkommenteret for nu, da der formentlig skal ændres i IDoor koden/der hvor event raises - Anna
+        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect2()
+        {
+            _door.SetDoorState(true).Returns(true);
+            _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
+            _display.Received().WriteMessage("Connect phone and close the door");
+        }
 
         [Test]
         public void Test_HandleRFIDChangedEvent_WhenAvailableAndChargeControlConnected_RFIDChangedEventRaised_MethodCallCorrect()
