@@ -27,6 +27,7 @@ namespace Ladeskab.Controller
         private IDisplay _display;
         private IFileWriter _fileWriter;
         private int _oldID;
+        private IRFIDReader _rfidReader;
 
         public StationControl(IDoor door, IRFIDReader rfidReader, IDisplay display, IChargeControl chargeControl, IUSBCharger charger, IFileWriter fileWriter) // Tilføjet parametre af Line 18/3 16.30
         {
@@ -38,17 +39,20 @@ namespace Ladeskab.Controller
             _charger = charger;
             _chargeControl = chargeControl;
             _door = door;
+            _rfidReader = rfidReader;
         }
         private void HandleDoorChangedEvent(object s, DoorChangedEventArgs e)
         {
-            if (e.DoorState == true) 
+            if (e.DoorState == true && _state == LadeskabsState.Available) 
             {
                 _display.WriteMessage("Connect phone and close the door");
+                _state = LadeskabsState.DoorOpen;
                 e.DoorState = false;
             }
             else
             {
                 _display.WriteMessage("Read RFID");
+                //_rfidReader.
             }
         }
 
@@ -74,7 +78,7 @@ namespace Ladeskab.Controller
                     break;
 
                 case LadeskabsState.DoorOpen:
-                    //Gør ingenting
+                    
                     break;
 
                 case LadeskabsState.Locked:

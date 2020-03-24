@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using Ladeskab.DisplayFolder;
@@ -23,7 +24,9 @@ namespace Ladeskab.Controller
         public ChargeControl(IUSBCharger usbCharger, IDisplay display )
         {
             _USBCharger = usbCharger;
+            //_IsConnected = usbCharger.Connected;
             _display = display;
+            IsConnected();
 
             _USBCharger.USBChangedEvent += HandleUSBChangedEvent;
         }
