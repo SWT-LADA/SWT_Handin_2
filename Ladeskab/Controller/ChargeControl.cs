@@ -24,9 +24,7 @@ namespace Ladeskab.Controller
         public ChargeControl(IUSBCharger usbCharger, IDisplay display )
         {
             _USBCharger = usbCharger;
-            //_IsConnected = usbCharger.Connected;
             _display = display;
-            IsConnected();
 
             _USBCharger.USBChangedEvent += HandleUSBChangedEvent;
         }
