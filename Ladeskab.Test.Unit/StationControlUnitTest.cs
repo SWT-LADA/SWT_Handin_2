@@ -37,19 +37,17 @@ namespace Ladeskab.Test.Unit
             _uut = new StationControl(_door, _rfidReader, _display, _chargeControl, _usbCharger, _fileWriter);
         }
 
-        //Overvejer, om IDoor burde indeholder SetDoorState(bool state), da jeg ellers ikke har kontrol over det - Anna
         [Test]
-        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect1()
+        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_DoorStateFalse_MethodCallCorrect()
         {
-            _door.SetDoorState(false);
-            _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
+            _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs(){DoorState = false});
             _display.Received().WriteMessage("Read RFID");
         }
-        [Test] //udkommenteret for nu, da der formentlig skal ændres i IDoor koden/der hvor event raises - Anna
-        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_MethodCallCorrect2()
+
+        [Test]
+        public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_DoorStateTrue_MethodCallCorrect()
         {
-            _door.SetDoorState(true).Returns(true);
-            _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs());
+            _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs(){DoorState = true});
             _display.Received().WriteMessage("Connect phone and close the door");
         }
 

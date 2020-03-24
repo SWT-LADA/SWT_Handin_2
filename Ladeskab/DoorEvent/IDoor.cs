@@ -10,8 +10,6 @@ namespace Ladeskab.DoorEvent
     {
         event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
 
-        bool SetDoorState(bool NewState);
-
         void LockDoor();
 
         void UnlockDoor();
