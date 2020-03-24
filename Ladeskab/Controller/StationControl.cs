@@ -43,16 +43,14 @@ namespace Ladeskab.Controller
         }
         private void HandleDoorChangedEvent(object s, DoorChangedEventArgs e)
         {
-            if (e.DoorState == true && _state == LadeskabsState.Available) 
+            if (e.DoorState == true) 
             {
                 _display.WriteMessage("Connect phone and close the door");
-                _state = LadeskabsState.DoorOpen;
                 e.DoorState = false;
             }
             else
             {
                 _display.WriteMessage("Read RFID");
-                //_rfidReader.
             }
         }
 
