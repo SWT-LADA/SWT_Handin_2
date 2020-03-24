@@ -69,15 +69,15 @@ namespace Ladeskab.Test.Unit
             Assert.AreEqual(result,_uut._IsConnected);
         }
 
+        [TestCase(false, false)]
         [TestCase(true, true)]
         public void Test_IsConnected_DifferentStates(bool state, bool result)
         {
-            //_usbCharger.SimulateConnected(true);
-            _usbCharger.Connected.Returns(true);
-            //_uut.IsConnected();
-            Assert.That(_uut._IsConnected, Is.EqualTo(true));
+            _usbCharger.Connected.Returns(state);
 
-            //Assert.AreEqual(result, _uut.IsConnected());
+            _uut.IsConnected();
+
+            Assert.AreEqual(result, _uut.IsConnected());
         }
     }
 }
