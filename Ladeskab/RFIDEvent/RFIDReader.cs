@@ -11,7 +11,7 @@ namespace Ladeskab.RFIDEvent
 
         public event EventHandler<RFIDChangedEventArgs> RFIDChangedEvent;
 
-        public void SetRFID(int ID) //hvordan testes den når den er void? 
+        public void SetRFID(int ID) 
         { 
             OnRFIDChanged(new RFIDChangedEventArgs {RFID = ID});
         }

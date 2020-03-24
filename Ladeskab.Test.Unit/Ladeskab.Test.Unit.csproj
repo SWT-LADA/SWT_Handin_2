@@ -71,6 +71,7 @@
     <Compile Include="DisplayUnitTest.cs" />
     <Compile Include="DoorUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RFIDReaderUnitTest.cs" />
     <Compile Include="StationControlUnitTest.cs" />
     <Compile Include="USBChargerUnitTest.cs" />
   </ItemGroup>
