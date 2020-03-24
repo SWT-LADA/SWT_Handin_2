@@ -17,7 +17,6 @@ namespace Ladeskab.Controller
         {
             Available,
             Locked,
-            DoorOpen
         };
 
         private LadeskabsState _state;
@@ -73,10 +72,6 @@ namespace Ladeskab.Controller
                     {
                         _display.WriteMessage("Phone not connected properly, try connecting again");
                     }
-                    break;
-
-                case LadeskabsState.DoorOpen:
-                    
                     break;
 
                 case LadeskabsState.Locked:
