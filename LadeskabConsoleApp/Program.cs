@@ -51,7 +51,7 @@ namespace LadeskabConsoleApp
                         System.Console.WriteLine("Indtast RFID id: ");
                         string idString = System.Console.ReadLine();
 
-                        int id = Convert.ToInt32(idString); // Her kommer en exception hvis man ikke indtaster et ID. Vi kan overveje om vi vil lave vores egen exception /Line
+                        int id = Convert.ToInt32(idString); 
                         rfidReader.SetRFID(id);
                         break;
 

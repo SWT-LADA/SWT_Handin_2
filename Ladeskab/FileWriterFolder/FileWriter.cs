@@ -12,7 +12,7 @@ namespace Ladeskab.FileWriterFolder
         private string logFile = "logfile.txt";
         public void LogDoorLocked(int ID)
         {
-            using (var writer = File.AppendText(logFile)) // Filen gemmes under ...\SWT_Handin_2\LadeskabConsoleApp\bin\Debug
+            using (var writer = File.AppendText(logFile)) 
             {
                 writer.WriteLine(DateTime.Now + ": Door locked with RFID: {0}", ID);
             }

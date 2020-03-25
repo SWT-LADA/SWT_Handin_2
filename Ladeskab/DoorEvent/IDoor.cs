@@ -11,7 +11,6 @@ namespace Ladeskab.DoorEvent
         event EventHandler<DoorChangedEventArgs> DoorChangedEvent;
 
         void LockDoor();
-
         void UnlockDoor();
     }
 }

@@ -35,7 +35,7 @@ namespace Ladeskab.DoorEvent
 
         protected virtual void OnDoorChanged(DoorChangedEventArgs e)
         {
-            DoorChangedEvent?.Invoke(this, e); //sending an instance of the data to all connected observers 
+            DoorChangedEvent?.Invoke(this, e); 
         }
     }
 }

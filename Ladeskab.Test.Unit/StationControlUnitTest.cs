@@ -41,6 +41,7 @@ namespace Ladeskab.Test.Unit
         public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_DoorStateFalse_MethodCallCorrect()
         {
             _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs(){DoorState = false});
+
             _display.Received().WriteMessage("Read RFID");
         }
 
@@ -48,6 +49,7 @@ namespace Ladeskab.Test.Unit
         public void Test_HandleDoorChangedEvent_DoorChangedEventRaised_DoorStateTrue_MethodCallCorrect()
         {
             _door.DoorChangedEvent += Raise.EventWith(new DoorChangedEventArgs(){DoorState = true});
+
             _display.Received().WriteMessage("Connect phone and close the door");
         }
 
@@ -56,6 +58,7 @@ namespace Ladeskab.Test.Unit
         {
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+
             _door.Received().LockDoor();
             _usbCharger.Received().StartCharge();
             _fileWriter.Received().LogDoorLocked(10);
@@ -67,6 +70,7 @@ namespace Ladeskab.Test.Unit
         {
             _chargeControl.IsConnected().Returns(false);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+
             _door.DidNotReceive().LockDoor();
             _usbCharger.DidNotReceive().StartCharge();
             _fileWriter.DidNotReceive().LogDoorLocked(10);
@@ -79,6 +83,7 @@ namespace Ladeskab.Test.Unit
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
+
             _usbCharger.Received().StopCharge();
             _door.Received().UnlockDoor();
             _fileWriter.Received().LogDoorUnlocked(10);
@@ -91,6 +96,7 @@ namespace Ladeskab.Test.Unit
             _chargeControl.IsConnected().Returns(true);
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 10 });
             _rfidReader.RFIDChangedEvent += Raise.EventWith(new RFIDChangedEventArgs { RFID = 5 });
+
             _usbCharger.DidNotReceive().StopCharge();
             _door.DidNotReceive().UnlockDoor();
             _fileWriter.DidNotReceive().LogDoorUnlocked(10);

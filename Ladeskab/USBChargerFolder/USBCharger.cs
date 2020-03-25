@@ -13,7 +13,7 @@ namespace Ladeskab.USBChargerFolder
         private const double MaxCurrent = 500.0; // mA
         private const double FullyChargedCurrent = 2.5; // mA 
         private const double OverloadCurrent = 750; // mA
-        private const double ChargeTimeMinutes = 0.1; // Det tager 6 sekunder at oplade telefonen ** ÆNDRE HER ***
+        private const double ChargeTimeMinutes = 0.1; // Det tager 6 sek at oplade telefonen ** HER DER SKAL ÆNDRES LADETID ***
         private const int CurrentTickInterval = 250; // Sætter timer interval til 0.25 sekunder (250 ms)
 
         public event EventHandler<USBChangedEventArgs> USBChangedEvent;
@@ -33,22 +33,22 @@ namespace Ladeskab.USBChargerFolder
             Connected = true;
             _overload = false;
 
-            _timer = new System.Timers.Timer(); // Opretter objekt af timer
-            _timer.Enabled = false; // Når den er lig false raiser den ikke elasped event. Sætte automatisk til true når man kalder _timer.Start()
+            _timer = new System.Timers.Timer(); 
+            _timer.Enabled = false; // Når den er lig false raiser den ikke elasped event. Sættes automatisk til true når man kalder _timer.Start()
             _timer.Interval = CurrentTickInterval; // Timer "ticker" for hver 250 ms
             _timer.Elapsed += TimerOnElapsed; // Kalder TimerOnElapsed for hvert tick
         }
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            // Køres kun når opladning er i gang
             if (_charging)
             {
                 _ticksSinceStart++;
                 if (Connected && !_overload)
                 {
                     double newValue = MaxCurrent -
-                                      _ticksSinceStart * (MaxCurrent - FullyChargedCurrent) / (ChargeTimeMinutes * 60 * 1000 / CurrentTickInterval);
+                                      _ticksSinceStart * (MaxCurrent - FullyChargedCurrent) 
+                                      / (ChargeTimeMinutes * 60 * 1000 / CurrentTickInterval);
                     CurrentValue = Math.Max(newValue, FullyChargedCurrent);
                 }
                 else if (Connected && _overload)
@@ -93,17 +93,16 @@ namespace Ladeskab.USBChargerFolder
                 }
 
                 OnUSBChanged();
+
                 _ticksSinceStart = 0;
-
                 _charging = true;
-
-                _timer.Start(); // Starter timer
+                _timer.Start(); 
             }
         }
 
         public void StopCharge()
         {
-            _timer.Stop(); // Stopper timer
+            _timer.Stop(); 
 
             CurrentValue = 0.0;
             OnUSBChanged();

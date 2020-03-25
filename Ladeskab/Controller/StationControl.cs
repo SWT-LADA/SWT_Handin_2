@@ -25,14 +25,17 @@ namespace Ladeskab.Controller
         private IDoor _door;
         private IDisplay _display;
         private IFileWriter _fileWriter;
-        private int _oldID;
         private IRFIDReader _rfidReader;
+        private int _oldID;
 
-        public StationControl(IDoor door, IRFIDReader rfidReader, IDisplay display, IChargeControl chargeControl, IUSBCharger charger, IFileWriter fileWriter) // Tilføjet parametre af Line 18/3 16.30
+        public StationControl(IDoor door, IRFIDReader rfidReader, IDisplay display, 
+            IChargeControl chargeControl, IUSBCharger charger, IFileWriter fileWriter) 
         {
             _state = LadeskabsState.Available;
+
             door.DoorChangedEvent += HandleDoorChangedEvent;
             rfidReader.RFIDChangedEvent += HandleRFIDChangedEvent;
+
             _display = display; 
             _fileWriter = fileWriter;
             _charger = charger;
@@ -75,7 +78,7 @@ namespace Ladeskab.Controller
                     break;
 
                 case LadeskabsState.Locked:
-                    if (CheckID(e.RFID,_oldID)) //evt. byt om på rækkefølgen af disse
+                    if (CheckID(_oldID,e.RFID)) 
                     {
                         _charger.StopCharge();
                         _door.UnlockDoor();

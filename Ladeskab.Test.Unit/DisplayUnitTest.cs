@@ -6,8 +6,6 @@ using Ladeskab.DisplayFolder;
 using NSubstitute;
 using NUnit.Framework.Constraints;
 
-//using NSubstitute;
-
 namespace Ladeskab.Test.Unit
 {
     [TestFixture]

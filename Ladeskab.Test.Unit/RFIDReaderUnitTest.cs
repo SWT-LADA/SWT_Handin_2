@@ -11,11 +11,10 @@ namespace Ladeskab.Test.Unit
 {
     [TestFixture]
     class RFIDReaderUnitTest
-    
     {
-
         private RFIDReader _uut;
         private RFIDChangedEventArgs _receivedEventArgs;
+
         [SetUp]
         public void Setup()
         {

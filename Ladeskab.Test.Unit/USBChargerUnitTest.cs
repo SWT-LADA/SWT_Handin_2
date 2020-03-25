@@ -34,7 +34,6 @@ namespace Ladeskab.Test.Unit
         public void Test_SimulateOverload_StartCharge_StateTrue(bool state, int currentValueResult)
         {
             _uut.StartCharge();
-
             _uut.SimulateOverload(state);
 
             System.Threading.Thread.Sleep(1000);
@@ -46,7 +45,6 @@ namespace Ladeskab.Test.Unit
         public void Test_SimulateOverload_StartCharge_StateFalse(bool state, int currentValueResult)
         {
             _uut.StartCharge();
-
             _uut.SimulateOverload(state);
 
             System.Threading.Thread.Sleep(1000);
