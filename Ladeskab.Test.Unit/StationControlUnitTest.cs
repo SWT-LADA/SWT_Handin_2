@@ -83,8 +83,6 @@ namespace Ladeskab.Test.Unit
             _door.Received().UnlockDoor();
             _fileWriter.Received().LogDoorUnlocked(10);
             _display.Received().WriteMessage("Remove phone");
-
-
         }
 
         [Test]
