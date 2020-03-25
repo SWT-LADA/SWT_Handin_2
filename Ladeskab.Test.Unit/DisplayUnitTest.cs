@@ -24,11 +24,16 @@ namespace Ladeskab.Test.Unit
         [TestCase("Test")]
         public void Test(string input)
         {
+            StringWriter stringWriter = new StringWriter();
+            Console.SetOut(stringWriter); // hver gang noget bliver skrevet til consollen lægges det i stringwriter
+            string forventet = input;
+
             //mangler at kunne teste om det den metode, der er void, men udskriver på konsol, udskriver, er det samme som inputtet
             _uut.WriteMessage(input); 
             //Assert.That(_uut.WriteMessage(input),Contains.Item())};
            //Assert.That(_uut.WriteMessage(input),Is.EqualTo("Test"));
            //// _uut.Received().WriteMessage("Test");
+           Assert.That(stringWriter.ToString().Contains(forventet));
         }
     }
 }
